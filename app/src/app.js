@@ -60,7 +60,7 @@ function histories(e){return e.materials.map((m,i)=>{const recorded=state.auditL
 function renderHistory(e){return histories(e).reverse().map(h=>{const changes=h.after.filter((a,i)=>JSON.stringify([a.status,a.value,a.unit,a.activeIds])!==JSON.stringify([h.before[i]?.status,h.before[i]?.value,h.before[i]?.unit,h.before[i]?.activeIds]));return `<article class="change-card"><div class="tag-row">${badge(h.isUser?'supported':'expired',h.isUser?'本次工作区录入':'内置样例录入')}${labelType(e)}</div><h3 class="mt10">${esc(h.material.title)}</h3><time>录入 ${esc(fmt(h.at,true))} · ${RULE_VERSION}</time>${changes.map(a=>{const b=h.before.find(c=>c.id===a.id);return `<p>${esc(a.label)}</p><div class="change-values"><span><strong>录入前 · ${esc(b?.labelStatus||'待核实')}</strong>${esc(displayClaim(b))}</span>${icon('arrow')}<span><strong>录入后 · ${esc(a.labelStatus)}</strong>${esc(displayClaim(a))}</span></div>`;}).join('')||'<p>未改变当前主张结论，仍保留本次录入与来源记录。</p>'}<button class="text-btn" data-evidence="${esc(h.material.id)}">查看触发证据 ${icon('arrow')}</button></article>`;}).join('')||'<p class="empty">暂无更新记录</p>';}
 function renderSources(){
  const materials=state.events.flatMap(e=>e.materials.map(m=>({...m,event:e})));
- $('#alternate-view').innerHTML=`<div class="panel-top"><h2>数据接入与来源清单</h2><span class="tiny muted">${materials.length} 份材料</span></div><div class="info-callout">扶摇 / iFinD：尚未接入，未取得调用权限验证。模型：${config.aiConfigured?'服务端已配置，需实际调用验证':'未配置'}。手工录入可用，资料不会自动刷新。真实历史样例的资料截止日期为 2023-10-13。</div><table class="source-table"><thead><tr><th>资料类型</th><th>原始材料</th><th>核验与边界</th><th>来源入口</th></tr></thead><tbody>${materials.map(m=>`<tr><td>${labelType(m.event)}<p>${esc(SOURCE_TYPES[m.sourceType])}</p></td><td><strong>${esc(m.title)}</strong><p>${esc(m.source)} · ${esc(fmt(m.publishedAt))}</p></td><td>${esc(sourceMeta(m))}<p>${m.isSynthetic?'仅用于流程验证，无真实披露':m.sourceCheck==='curated'?'原始页面与摘录已人工核对；不保证实时完整':'用户提供，未独立核验'}</p></td><td><button class="text-btn" data-evidence="${esc(m.id)}">查看记录</button>${safeUrl(m.url)?`<a class="help-link" href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">原始页面 ↗</a>`:''}</td></tr>`).join('')}</tbody></table>`;
+ $('#alternate-view').innerHTML=`<div class="panel-top"><h2>数据接入与来源清单</h2><span class="tiny muted">${materials.length} 份材料</span></div><div class="info-callout">扶摇 / iFinD：尚未接入，未取得调用权限验证。模型：${config.aiConfigured?`${esc(config.provider)} / ${esc(config.model)}（配置状态，非实时健康检测）`:'未配置'}。手工录入可用，资料不会自动刷新。真实历史样例的资料截止日期为 2023-10-13。</div><table class="source-table"><thead><tr><th>资料类型</th><th>原始材料</th><th>核验与边界</th><th>来源入口</th></tr></thead><tbody>${materials.map(m=>`<tr><td>${labelType(m.event)}<p>${esc(SOURCE_TYPES[m.sourceType])}</p></td><td><strong>${esc(m.title)}</strong><p>${esc(m.source)} · ${esc(fmt(m.publishedAt))}</p></td><td>${esc(sourceMeta(m))}<p>${m.isSynthetic?'仅用于流程验证，无真实披露':m.sourceCheck==='curated'?'原始页面与摘录已人工核对；不保证实时完整':'用户提供，未独立核验'}</p></td><td><button class="text-btn" data-evidence="${esc(m.id)}">查看记录</button>${safeUrl(m.url)?`<a class="help-link" href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">原始页面 ↗</a>`:''}</td></tr>`).join('')}</tbody></table>`;
 }
 function renderAllHistory(){ $('#alternate-view').innerHTML=`<h2>全部事件的录入与变化</h2><p class="muted tiny">记录按事件分组。内置样例与用户新增记录分别标记，前后结论由实际证据重算。</p>${state.events.map(e=>`<h3 class="mt26">${esc(e.title)}</h3>${renderHistory(e)}`).join('')}`; }
 function openEvidence(id){
@@ -115,13 +115,13 @@ async function analyze(mode){
   let suggested=null;
   if(mode==='ai'){
    draft.busy=true;renderMaterial();
-   const response=await fetch('/api/analyze',{method:'POST',headers:{'content-type':'application/json'},signal:AbortSignal.timeout(30000),body:JSON.stringify({text:i.text,events:state.events.map(e=>({id:e.id,title:e.title}))})});
+   const response=await fetch('/api/analyze',{method:'POST',headers:{'content-type':'application/json'},signal:AbortSignal.timeout(55000),body:JSON.stringify({text:i.text,events:state.events.map(e=>({id:e.id,title:e.title}))})});
    const data=await response.json();if(!response.ok)throw new Error(data.error||'AI 调用失败，现有结论未改变');
    statements=data.statements;draft.model=data.model;draft.promptVersion=data.promptVersion;suggested=data.eventId;
   }
-  const preset=draft.preset&&PRESETS[draft.preset];
+  const preset=mode==='rules'&&draft.preset&&PRESETS[draft.preset];
   const matches=candidates(i.text,state.events);
-  draft.eventId=preset?preset.eventId:suggested||matches.find(m=>m.score>=7)?.id||'new';
+  draft.eventId=mode==='ai'?(suggested||'new'):(preset?preset.eventId:matches.find(m=>m.score>=7)?.id||'new');
   if(preset){draft.newSubject=preset.newSubject||'';draft.newObject=preset.newObject||'';draft.newType=preset.newType||'';draft.newTitle=preset.newObject?`${preset.newSubject} · ${preset.newObject}`:'';}
   const e=eventForDraft();
   draft.statements=(preset&&i.text===preset.text?structuredClone(preset.statements):statements).map(s=>({...s,id:uid('statement'),claimId:s.claimId||(e?.claims.find(c=>/金额|投资/.test(c.label)&&/亿元|万元|金额|投资/.test(s.quote))?.id||e?.claims.find(c=>/业绩/.test(c.label)&&/业绩|收益|业务结构/.test(s.quote))?.id||e?.claims[0].id||'new-main'),unit:s.unit||'',scope:s.scope||'整体'}));
@@ -183,7 +183,7 @@ async function init(){
   const response=await fetch('/seed.json');if(!response.ok)throw new Error('样例资料加载失败');seed=validateWorkspace(await response.json());
   try{const saved=localStorage.getItem(STORAGE);state=saved?validateWorkspace(JSON.parse(saved)):structuredClone(seed);}catch(e){state=structuredClone(seed);storageAvailable=false;toast('本地记录不可读取或格式损坏，已载入内置样例；原记录未覆盖。可导出本次工作区。',true);}
   selected=state.events[0].id;render();
-  try{const r=await fetch('/api/config');if(!r.ok)throw new Error();config=await r.json();$('#model-status').textContent=config.aiConfigured?'AI 服务端已配置':'AI 未配置';}catch{$('#model-status').textContent='AI 配置状态未知';toast('无法读取服务配置，规则分析仍可使用。',true);}
+  try{const r=await fetch('/api/config');if(!r.ok)throw new Error();config=await r.json();$('#model-status').textContent=config.aiConfigured?`${config.provider||'AI'} · ${config.model}`:'AI 未配置';}catch{$('#model-status').textContent='AI 配置状态未知';toast('无法读取服务配置，规则分析仍可使用。',true);}
   if(!storageAvailable)$('#save-indicator').textContent='存储异常，需导出备份';
  }catch(e){$('#content').innerHTML=`<div class="initial-error" role="alert"><h2>工作区未能载入</h2><p>${esc(e.message)}</p><button class="secondary" id="reload-app">重新加载</button></div>`;$('#reload-app').onclick=()=>location.reload();$('#add-button').disabled=true;}
 }

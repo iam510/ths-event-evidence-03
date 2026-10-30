@@ -1,0 +1,24 @@
+{
+  "verifiedAt": "2026-10-30T15:03:08.370Z",
+  "provider": "MiniMax",
+  "model": "MiniMax-M3.1-Flash",
+  "promptVersion": "extract-v1.1",
+  "credential": "server-only / key label wym (value omitted)",
+  "durationMs": 319,
+  "productHttpStatus": 502,
+  "upstream": {
+    "httpStatus": 402,
+    "requestId": null,
+    "providerCode": null,
+    "finishReason": null,
+    "usage": null,
+    "providerError": "insufficient balance (1008)"
+  },
+  "input": "澄明能源公告：海岬储能项目总投资8亿元，仍须审批。公司预计该项目可能改善未来业务结构，但不作收益承诺。",
+  "result": {
+    "error": "模型服务调用失败（HTTP 402），现有结论未改变。",
+    "code": "MODEL_UPSTREAM_ERROR"
+  },
+  "sourceQuotesMatch": false,
+  "scope": "Single explicit real-provider contract test. No accuracy or coverage claim."
+}
