@@ -1,0 +1,34 @@
+{
+  "verifiedAt": "2026-10-30T16:01:24.015Z",
+  "method": "real provider through application adapter; no mock",
+  "results": [
+    {
+      "query": {
+        "kind": "stock",
+        "code": "300033.SZ"
+      },
+      "status": 200,
+      "count": 20,
+      "capturedAt": "2026-10-30T16:01:23.945Z",
+      "sourceTimesPreserved": true,
+      "requestId": "ff901ccb8cae4d5b9010206281677bbf",
+      "sourceLinksSafe": true,
+      "importableCount": 20,
+      "error": null
+    },
+    {
+      "query": {
+        "kind": "flash"
+      },
+      "status": 200,
+      "count": 20,
+      "capturedAt": "2026-10-30T16:01:24.014Z",
+      "sourceTimesPreserved": true,
+      "requestId": "b383e5c4e07945cdb6764eca79d0317e",
+      "sourceLinksSafe": true,
+      "importableCount": 20,
+      "error": null
+    }
+  ],
+  "note": "Metadata only. No news body or credential committed. Not a news-coverage or accuracy evaluation."
+}

@@ -1,0 +1,119 @@
+
+> trace-submission-03@1.0.0 check
+> npm test && npm run build && npm run validate
+
+
+> trace-submission-03@1.0.0 test
+> npm --prefix app test
+
+
+> trace-event-evidence@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ API 01 missing key explicitly returns 503 (16.360875ms)
+✔ API 02 missing origin rejected (0.205875ms)
+✔ API 03 wrong origin rejected (0.271291ms)
+✔ API 04 empty and overlong source rejected (0.793459ms)
+✔ API 05 provider failure does not invent result (0.524292ms)
+✔ API 06 invalid JSON rejected (0.663583ms)
+✔ API 07 fake citation blocked (0.663459ms)
+✔ API 08 valid structured response remains review-only (mock provider) (0.770542ms)
+✔ API 09 unknown matched event rejected (0.704541ms)
+✔ API 10 free-form model financial value discarded (0.372166ms)
+✔ API 11 provider timeout visible (0.408541ms)
+✔ API 12 no key is leaked in error response (0.289875ms)
+✔ API 13 MiniMax payload omits incompatible generic fields (0.042417ms)
+✔ API 14 generic provider still requests JSON mode (0.02925ms)
+✔ API 15 HTTP-200 provider business error rejected (0.209833ms)
+✔ API 16 length truncation is explicit failure (0.049167ms)
+✔ API 17 JSON fence accepted without executing text (0.374666ms)
+✔ API 18 reasoning prefix not interpreted as final evidence (0.033417ms)
+✔ API 19 empty or unclosed reasoning cannot become JSON (0.061875ms)
+✔ API 20 model config never includes credentials (0.05375ms)
+✔ API 21 per-minute limit and recovery use fake time (0.080084ms)
+✔ API 22 per-day and global counters enforce budgets within an instance (0.085083ms)
+✔ API 23 concurrency slots released exactly once (0.105375ms)
+✔ API 24 limiter returns 429 with Retry-After and no provider call (0.172209ms)
+✔ API 25 failed upstream releases concurrency slot (0.13225ms)
+✔ API 26 MiniMax HTTP 402 gives actionable balance error (0.190875ms)
+✔ API 27 MiniMax 200 with business code 1008 remains a failure (0.412959ms)
+✔ 01 seed validates and real/synthetic are separate (7.8225ms)
+✔ 02 company announcement and counterparty amount conflict (0.397333ms)
+✔ 03 exact targeted correction resolves only amount (2.031958ms)
+✔ 04 opinions cannot confirm earnings (0.175583ms)
+✔ 05 denial remains scoped statement, not a truth verdict (0.190708ms)
+✔ 06 expired intention does not mean false contract (0.9505ms)
+✔ 07 historical restructured transaction explicitly replaces old regulatory version (0.305834ms)
+✔ 08 duplicate original material is blocked (2.44675ms)
+✔ 09 decimal punctuation is not lost in fingerprint (0.282791ms)
+✔ 10 same root repost counts once (0.334ms)
+✔ 11 user claim of announcement does not auto get high weight (0.162ms)
+✔ 12 missing real source link is low weight (0.079333ms)
+✔ 13 lower weight cannot replace curated evidence (0.25025ms)
+✔ 14 older disclosure cannot replace later target (0.159584ms)
+✔ 15 missing disclosure cannot replace dated target (0.150333ms)
+✔ 16 update target must be same claim (0.139125ms)
+✔ 17 update target must be same scope (0.127375ms)
+✔ 18 unsupported quote is blocked (0.12625ms)
+✔ 19 numeric hallucination is blocked (0.140417ms)
+✔ 20 unit must occur in source quote (0.129166ms)
+✔ 21 invalid date and timezone missing rejected (0.02825ms)
+✔ 22 updatedAt cannot predate disclosure (0.13ms)
+✔ 23 same company other project only weak candidate (0.752666ms)
+✔ 24 same company and object suggest candidate but no auto merge (0.083291ms)
+✔ 25 no matching subject yields no candidates (0.388042ms)
+✔ 26 empty and overlong inputs are rejected (0.094416ms)
+✔ 27 rules distinguish opinion, inference and rumor (0.310541ms)
+✔ 28 deterministic promise never classified as fact (0.044666ms)
+✔ 29 financial promise cannot be submitted as fact value (0.172917ms)
+✔ 30 malicious source links rejected (0.096334ms)
+✔ 31 forged import snapshot rebuilt from actual evidence (0.445583ms)
+✔ 32 mixed real/synthetic import rejected (0.153ms)
+✔ 33 malformed import does not validate (0.058625ms)
+✔ 34 historical dataset marked stale independent of ingestion (0.160583ms)
+✔ 35 same scope different units stays conflict (1.018583ms)
+✔ 36 different scopes do not falsely conflict (0.256875ms)
+✔ 37 rumor update cannot override fact evidence (0.219042ms)
+✔ 38 duplicate statement IDs rejected (0.126625ms)
+✔ 39 explicit unrelated object mention is not positive match (0.072791ms)
+✔ 40 unverified secondary news alone cannot count as direct fact evidence (0.074042ms)
+✔ 41 date-only expiry uses stated Beijing calendar day boundary (0.071416ms)
+✔ 42 capture and ingestion clocks preserved independently, legacy capture optional (0.381208ms)
+✔ 43 malformed capture timestamp rejected (0.108458ms)
+✔ 44 new verified relation must quote the chosen source (0.270667ms)
+✔ FEED 01 missing config explicit 503 (15.980542ms)
+✔ FEED 02 cross-origin cannot query (0.18875ms)
+✔ FEED 03 invalid ticker never calls provider (0.350875ms)
+✔ FEED 04 authenticated fixed endpoint, source clocks, IDs and raw fields retained (2.787709ms)
+✔ FEED 05 HTTP200 business permission error is not success or leaked message (0.607292ms)
+✔ FEED 06 redirect rejected instead of forwarding key (0.480083ms)
+✔ FEED 07 missing summary disables import, missing time stays null (0.240833ms)
+✔ FEED 08 unsafe links and wrong timestamp types blocked (0.122917ms)
+✔ FEED 09 flash publication/update clocks separate (0.279166ms)
+✔ FEED 10 cache retains original capture time and does not requery (1.5355ms)
+✔ FEED 11 refresh failure is explicit, no stale success returned (1.223959ms)
+✔ FEED 12 limiter prevents provider request (0.303334ms)
+✔ FEED 13 timeout distinct from data failure (0.190167ms)
+✔ FEED 14 HTML is displayed as text, not executed (0.087458ms)
+ℹ tests 85
+ℹ suites 0
+ℹ pass 85
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 104.872416
+
+> trace-submission-03@1.0.0 build
+> node scripts/build.mjs
+
+Built self-contained Worker ESM; browser assets embedded.
+
+> trace-submission-03@1.0.0 validate
+> npm --prefix app run validate
+
+
+> trace-event-evidence@1.0.0 validate
+> node scripts/validate-artifact.mjs
+
+Artifact is valid ESM and exports default.fetch

@@ -25,7 +25,7 @@ export function validateMaterial(m, event, existing = true) {
   invariant(!m.url || safeUrl(m.url), '来源链接必须为 HTTP/HTTPS 地址');
   invariant(['curated', 'user'].includes(m.sourceCheck), '来源核验标记无效');
   invariant(typeof m.isSynthetic === 'boolean', '缺少真实/构造标记');
-  for (const key of ['publishedAt', 'occurredAt', 'updatedAt', 'ingestedAt']) invariant(validTime(m[key]), `${key} 时间无效或缺少时区`);
+  for (const key of ['publishedAt', 'occurredAt', 'updatedAt', 'ingestedAt', 'capturedAt']) invariant(validTime(m[key]), `${key} 时间无效或缺少时区`);
   invariant(m.ingestedAt, '录入时间不可缺失');
   invariant(!m.updatedAt || !m.publishedAt || Date.parse(m.updatedAt) >= Date.parse(m.publishedAt), '材料更新时间早于披露时间，请核对');
   invariant(Array.isArray(m.statements) && m.statements.length > 0 && m.statements.length <= 20, '每份材料需有 1–20 条主张');
@@ -124,7 +124,10 @@ export function validateWorkspace(w) {
     invariant(Array.isArray(e.relations) && Array.isArray(e.aliases), '事件关系结构无效');
     const partial = { ...e, materials: [] };
     for (const m of e.materials) { validateMaterial(m, partial); invariant(m.isSynthetic === e.isSynthetic, '真实与构造材料不能混在同一事件'); invariant(!partial.materials.some(p => fingerprint(p.text) === fingerprint(m.text)), '工作区包含重复原文'); partial.materials.push(m); }
-    for (const r of e.relations) invariant(typeof r.company === 'string' && typeof r.role === 'string' && typeof r.basis === 'string' && e.materials.some(m => m.id === r.materialId), '标的关系缺少可定位依据');
+    for (const r of e.relations) {
+      invariant(typeof r.company === 'string' && r.company.trim() && r.company.length<=200 && typeof r.role === 'string' && r.role.trim() && r.role.length<=200 && typeof r.basis === 'string' && r.basis.trim() && r.basis.length<=2000 && e.materials.some(m => m.id === r.materialId), '标的关系缺少可定位依据');
+      if(r.quoteVerified)invariant(e.materials.find(m=>m.id===r.materialId).text.includes(r.basis),'标的关系依据必须逐字出现在材料中');
+    }
   }
   // Imported audit summaries are untrusted: reconstruct snapshots from actual materials.
   w.auditLog = w.auditLog.filter(a => w.events.some(e => e.id === a.eventId && e.materials.some(m => m.id === a.materialId))).slice(-500).map(a => {
