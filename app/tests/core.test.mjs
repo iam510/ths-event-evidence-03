@@ -47,3 +47,4 @@ test('37 rumor update cannot override fact evidence',()=>{const m=correction();m
 test('38 duplicate statement IDs rejected',()=>{const m=correction();m.statements[0].id='en-a-amount';assert.throws(()=>addMaterial(energy(),m),/编号重复/);});
 test('39 explicit unrelated object mention is not positive match',()=>{const c=candidates('澄明能源披露青原项目，本说明不涉及海岬储能项目。',seed().events);assert.equal(c[0].score,3);});
 test('40 unverified secondary news alone cannot count as direct fact evidence',()=>{const e=energy();e.materials=[{...e.materials[2],sourceType:'news',sourceCheck:'user',url:'https://example.com/news'}];assert.equal(amount(e).status,'pending');});
+test('41 date-only expiry uses stated Beijing calendar day boundary',()=>{const e=seed().events[1];assert.equal(snapshot(e,'2026-10-20T15:59:59Z')[1].status,'supported');assert.equal(snapshot(e,'2026-10-20T16:00:00Z')[1].status,'expired');});

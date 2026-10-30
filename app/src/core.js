@@ -69,7 +69,7 @@ export function snapshot(event, asOf = new Date().toISOString()) {
   return event.claims.map(claim => {
     const evidence = all.filter(s => s.claimId === claim.id);
     const active = evidence.filter(s => !superseded.has(s.id));
-    const current = active.filter(s => !s.validUntil || Date.parse(s.validUntil.length === 10 ? `${s.validUntil}T23:59:59.999Z` : s.validUntil) >= Date.parse(asOf));
+    const current = active.filter(s => !s.validUntil || Date.parse(s.validUntil.length === 10 ? `${s.validUntil}T23:59:59.999+08:00` : s.validUntil) >= Date.parse(asOf));
     const direct = current.filter(s => s.kind === 'fact' && s.weight.rank >= 2 && ['announcement', 'regulator'].includes(s.material.sourceType));
     const scope = [...new Set(direct.map(s => s.scope))];
     const conflict = scope.some(sc => new Set(direct.filter(s => s.scope === sc && s.stance !== 'deny').map(s => fingerprint(s.value) + '|' + fingerprint(s.unit || ''))).size > 1 || (direct.some(s => s.scope === sc && s.stance === 'deny') && direct.some(s => s.scope === sc && s.stance !== 'deny')));

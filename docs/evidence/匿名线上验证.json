@@ -1,0 +1,62 @@
+{
+  "verifiedAt": "2026-10-30T14:40:32.441Z",
+  "requestAuthentication": "none (no cookies or authorization headers)",
+  "results": [
+    {
+      "route": "/",
+      "status": 200,
+      "anonymous": true,
+      "sourceMatches": false,
+      "sha256": "bab35ec60a279d05c60838464b96641f6d4155db8a81e059b422e4eea22236c3",
+      "platformHtmlModified": true,
+      "appShellPresent": true,
+      "note": "Cloudflare在原始HTML末尾追加了安全脚本，因此HTML不逐字相同；主应用JS、core、CSS、seed逐字相同，浏览器主链路已实测。"
+    },
+    {
+      "route": "/app.js",
+      "status": 200,
+      "anonymous": true,
+      "sourceMatches": true,
+      "sha256": "d4675047e2ac0f22713371507d2c19be42efdcabdbf197a0c07a106163227fe2"
+    },
+    {
+      "route": "/core.js",
+      "status": 200,
+      "anonymous": true,
+      "sourceMatches": true,
+      "sha256": "7f15173f2cdd3852c1006da4d416db65582fa9029ef830a36efb28112e016007"
+    },
+    {
+      "route": "/styles.css",
+      "status": 200,
+      "anonymous": true,
+      "sourceMatches": true,
+      "sha256": "9045652017c1d75d0862634c6d35dd8770f145df19e56304face1b592b15e839"
+    },
+    {
+      "route": "/seed.json",
+      "status": 200,
+      "anonymous": true,
+      "sourceMatches": true,
+      "sha256": "07b442c4b7643b73a332be83b43b7c6f6ffc49778289531dd7ab7660dc0a75aa"
+    },
+    {
+      "route": "/api/config",
+      "status": 200,
+      "body": {
+        "aiConfigured": false,
+        "storage": "browser-local",
+        "liveFeeds": false,
+        "version": "1.0.0"
+      }
+    },
+    {
+      "route": "/api/analyze",
+      "status": 503,
+      "body": {
+        "error": "AI 尚未配置。可切换到规则分析，并逐条人工核对。",
+        "code": "MODEL_NOT_CONFIGURED"
+      }
+    }
+  ]
+}
