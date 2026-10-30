@@ -1,0 +1,14 @@
+{
+  "name": "trace-submission-03", "version": "1.0.0", "private": true, "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "postinstall": "npm --prefix app ci",
+    "dev": "npm --prefix app run dev",
+    "start": "npm --prefix app start",
+    "test": "npm --prefix app test",
+    "build": "node scripts/build.mjs",
+    "validate": "npm --prefix app run validate",
+    "check": "npm test && npm run build && npm run validate",
+    "package:submission": "node scripts/package-submission.mjs"
+  }
+}

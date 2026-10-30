@@ -1,0 +1,16 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {analyzeRequest,validateAnalysis} from '../src/api.js';
+const env={MODEL_BASE_URL:'https://model.invalid/v1',MODEL_API_KEY:'test-placeholder',MODEL_NAME:'test-model'};
+const text='测试公司披露项目尚未签约。';
+const request=(body={text,events:[]},extra={})=>new Request('http://localhost:4303/api/analyze',{method:'POST',headers:{origin:'http://localhost:4303','content-type':'application/json',...extra},body:JSON.stringify(body)});
+test('API 01 missing key explicitly returns 503',async()=>{const r=await analyzeRequest(request(),{});assert.equal(r.status,503);assert.equal((await r.json()).code,'MODEL_NOT_CONFIGURED');});
+test('API 02 missing origin rejected',async()=>{const r=await analyzeRequest(new Request('http://localhost:4303/api/analyze',{method:'POST',body:'{}'}),env);assert.equal(r.status,403);});
+test('API 03 wrong origin rejected',async()=>{assert.equal((await analyzeRequest(request(undefined,{origin:'https://evil.invalid'}),env)).status,403);});
+test('API 04 empty and overlong source rejected',async()=>{assert.equal((await analyzeRequest(request({text:'',events:[]}),env)).status,422);assert.equal((await analyzeRequest(request({text:'x'.repeat(12001),events:[]}),env)).status,422);});
+test('API 05 provider failure does not invent result',async()=>{const r=await analyzeRequest(request(),env,async()=>new Response('',{status:500}));assert.equal(r.status,502);assert.equal((await r.json()).code,'MODEL_UPSTREAM_ERROR');});
+test('API 06 invalid JSON rejected',async()=>{const r=await analyzeRequest(request(),env,async()=>Response.json({choices:[{message:{content:'not json'}}]}));assert.equal(r.status,422);});
+test('API 07 fake citation blocked',async()=>{const r=await analyzeRequest(request(),env,async()=>Response.json({choices:[{message:{content:JSON.stringify({statements:[{quote:'不存在的引用',kind:'fact',stance:'support'}]})}}]}));assert.equal(r.status,422);assert.match((await r.json()).error,/引用/);});
+test('API 08 valid structured response remains review-only (mock provider)',async()=>{const r=await analyzeRequest(request(),env,async()=>Response.json({choices:[{message:{content:JSON.stringify({eventId:null,statements:[{quote:text,kind:'fact',stance:'deny'}]})}}]}));assert.equal(r.status,200);const data=await r.json();assert.equal(data.needsReview,true);assert.equal(data.statements[0].value,text);});
+test('API 09 unknown matched event rejected',()=>assert.throws(()=>validateAnalysis({eventId:'invented',statements:[{quote:text,kind:'fact',stance:'deny'}]},text,[]),/归属不存在/));
+test('API 10 free-form model financial value discarded',()=>{const r=validateAnalysis({statements:[{quote:text,kind:'fact',stance:'support',value:'建议买入必涨'}]},text,[]);assert.equal(r.statements[0].value,text);});
+test('API 11 provider timeout visible',async()=>{const r=await analyzeRequest(request(),env,async()=>{throw new DOMException('timeout','TimeoutError')});assert.equal(r.status,504);assert.match((await r.json()).error,/超时/);});
+test('API 12 no key is leaked in error response',async()=>{const r=await analyzeRequest(request(),env,async()=>{throw new Error('test-placeholder')});assert.ok(!(await r.text()).includes('test-placeholder'));});

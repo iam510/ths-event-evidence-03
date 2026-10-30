@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="追踪投资事件的来源、主张、冲突与版本变化。每一个判断，都有证据可循。">
+<title>证据台 TRACE · 投资事件工作台</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23162c2b'/%3E%3Cpath d='M10 11h20M20 11v19M13 20h14' stroke='%2385ddbd' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/styles.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#content">跳到事件详情</a>
+<div class="shell">
+<aside class="navigation" aria-label="工作区导航">
+ <a class="brand" href="/" aria-label="证据台首页"><span class="brand-mark">T<span></span></span><span>证据台<small>TRACE / RESEARCH</small></span></a>
+ <div class="workspace-name"><span class="avatar">研</span><div>个人研究工作区<small>独立判断，始于证据</small></div><span class="workspace-dot"></span></div>
+ <p class="nav-label">工作空间</p>
+ <button class="nav-item active" data-view="events" aria-current="page"><span data-icon="layers"></span>事件工作台<span class="nav-count" id="nav-count">3</span></button>
+ <button class="nav-item" data-view="sources"><span data-icon="database"></span>来源与数据</button>
+ <button class="nav-item" data-view="history"><span data-icon="history"></span>全部更新记录</button>
+ <div class="nav-divider"></div>
+ <p class="nav-label">研究方法</p>
+ <button class="nav-item" id="method-button"><span data-icon="book"></span>证据如何改变结论</button>
+ <div class="sidebar-note"><span class="mini-dot"></span><strong>让信息有来处</strong><p>事实、观点与传闻分开看。<br>结论变化，留下完整依据。</p><span class="mono">EVIDENCE BEFORE OPINION</span></div>
+ <div class="sidebar-bottom"><span class="avatar small">本</span><div>本地演示空间<small>数据保存在此浏览器</small></div></div>
+</aside>
+<div class="page">
+<header class="topbar"><div class="breadcrumb">研究工作区 <span>/</span> <strong id="view-name">事件工作台</strong></div><div class="top-actions"><span class="save-indicator" id="save-indicator"><i></i>本地存储</span><button class="icon-btn" id="help-button" aria-label="使用说明"><span data-icon="help"></span></button></div></header>
+<div class="page-heading"><div><div class="eyebrow">EVENT INTELLIGENCE</div><h1 id="page-title">每一次变化，都有证据可循。</h1><p id="page-subtitle">从最初的消息，到此刻的判断。看见事件完整的来龙去脉。</p></div><button class="primary" id="add-button"><span data-icon="plus"></span>录入新材料</button></div>
+<div class="modebar"><span><i class="status-dot amber"></i><strong id="model-status">正在检查 AI 配置</strong><span class="mode-detail">规则分析与人工复核可用</span></span><button class="text-btn" id="export-button"><span data-icon="download"></span>导出工作区</button><button class="text-btn" id="import-button">导入</button><button class="text-btn muted" id="reset-button">重置演示</button><input type="file" id="import-file" accept="application/json,.json" hidden></div>
+<main id="workspace" class="workbench" aria-label="事件研究工作台">
+ <section class="event-panel" aria-label="事件列表"><div class="panel-top"><h2>跟踪事件 <span id="event-count">03</span></h2><span class="tiny muted">WATCHLIST</span></div><label class="search"><span data-icon="search"></span><input id="event-search" placeholder="搜索公司、事件或关键词" aria-label="搜索公司、事件或关键词"><kbd>/</kbd></label><div class="filter-row"><button data-filter="all" class="chip active">全部</button><button data-filter="conflict" class="chip">有冲突</button><button data-filter="pending" class="chip">待核实</button></div><div id="event-list"></div><div class="list-foot"><span data-icon="shield"></span><p>真实历史资料与构造案例分别标记。<br>本工作区不提供投资建议。</p></div></section>
+ <section id="content" class="event-detail" tabindex="-1"><div class="loading">正在载入证据工作区…</div></section>
+</main>
+<section id="alternate-view" hidden></section>
+<footer class="footer"><span>TRACE 证据台 <span class="footer-sep">/</span> 只呈现有依据的判断</span><span>非实时资讯 · 不构成投资建议 <span class="footer-sep">·</span> v1.0</span></footer>
+</div>
+</div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<dialog id="material-dialog" class="large-dialog" aria-labelledby="material-dialog-title"><div id="material-dialog-content"></div></dialog>
+<dialog id="evidence-dialog" aria-labelledby="evidence-dialog-title"><div id="evidence-dialog-content"></div></dialog>
+<dialog id="info-dialog" aria-labelledby="info-title"><div class="dialog-head"><div><div class="eyebrow">HOW TRACE WORKS</div><h2 id="info-title">证据如何改变结论</h2></div><button class="icon-btn" data-close="info-dialog" aria-label="关闭说明"><span data-icon="close"></span></button></div><div class="dialog-body prose"><p>先选择一个事件，再核对每条主张。点击证据卡查看原文与四类时间，或用「历史回放」回到某次材料录入后。</p><ol><li><strong>材料不等于事实。</strong>每条主张分别标注事实陈述、观点、推测或传闻。事实陈述仍可能出错。</li><li><strong>高权重有条件。</strong>仅人工核对过的原始公司/监管资料（或构造情境中的原始材料）获得高权重；用户录入不会自动获得此标记。权重不是概率。</li><li><strong>更正需要明确指向。</strong>同主张、同适用范围、权重不低于目标且披露时间不早于目标，才能替换旧版本。其余情况保留冲突。</li><li><strong>否认有边界。</strong>公司否认只是新的证据，不能自动等于事实已彻底查明；适用期结束也不代表事件为假。</li><li><strong>转载不是独立佐证。</strong>同根来源使用相同来源组，去重后统计；原文重复导入会被拦截。</li></ol><h3>数据与隐私</h3><p>新增材料保存在当前浏览器的 localStorage，可导出 JSON 备份；不会自动同步到其他设备。勿录入密钥、真实持仓或敏感资料。点击 AI 分析时正文才会发送至服务端配置的模型提供商。</p><h3>已知边界</h3><p>未接入扶摇/iFinD 实时资讯；内置真实案例为截至 2023-10-13 的历史片段，不能代表今天的最新状态。模型未配置时仅能使用明确标记的规则辅助与人工核对。</p></div><div class="dialog-foot"><button class="primary" data-close="info-dialog">开始核对证据</button></div></dialog>
+<dialog id="confirm-dialog" aria-labelledby="confirm-title"><div class="dialog-head"><h2 id="confirm-title">重置演示工作区？</h2><button class="icon-btn" data-close="confirm-dialog" aria-label="取消重置"><span data-icon="close"></span></button></div><div class="dialog-body"><p>此操作会清除当前浏览器新增的材料和更新记录，恢复内置样例。建议先导出备份。</p></div><div class="dialog-foot"><button class="secondary" data-close="confirm-dialog">取消</button><button class="danger" id="confirm-reset">确认重置</button></div></dialog>
+<noscript>请启用 JavaScript 以操作事件与证据工作区。</noscript>
+</body></html>

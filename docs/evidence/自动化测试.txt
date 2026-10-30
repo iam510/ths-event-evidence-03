@@ -1,0 +1,86 @@
+
+> trace-submission-03@1.0.0 check
+> npm test && npm run build && npm run validate
+
+
+> trace-submission-03@1.0.0 test
+> npm --prefix app test
+
+
+> trace-event-evidence@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ API 01 missing key explicitly returns 503 (11.631875ms)
+✔ API 02 missing origin rejected (0.185709ms)
+✔ API 03 wrong origin rejected (0.253334ms)
+✔ API 04 empty and overlong source rejected (0.708417ms)
+✔ API 05 provider failure does not invent result (0.475ms)
+✔ API 06 invalid JSON rejected (0.465875ms)
+✔ API 07 fake citation blocked (0.55075ms)
+✔ API 08 valid structured response remains review-only (mock provider) (0.422667ms)
+✔ API 09 unknown matched event rejected (0.340417ms)
+✔ API 10 free-form model financial value discarded (0.217ms)
+✔ API 11 provider timeout visible (0.255125ms)
+✔ API 12 no key is leaked in error response (0.219791ms)
+✔ 01 seed validates and real/synthetic are separate (5.26725ms)
+✔ 02 company announcement and counterparty amount conflict (0.383ms)
+✔ 03 exact targeted correction resolves only amount (1.268334ms)
+✔ 04 opinions cannot confirm earnings (0.0965ms)
+✔ 05 denial remains scoped statement, not a truth verdict (0.126333ms)
+✔ 06 expired intention does not mean false contract (0.134042ms)
+✔ 07 historical restructured transaction explicitly replaces old regulatory version (0.23475ms)
+✔ 08 duplicate original material is blocked (0.28975ms)
+✔ 09 decimal punctuation is not lost in fingerprint (0.267416ms)
+✔ 10 same root repost counts once (0.291125ms)
+✔ 11 user claim of announcement does not auto get high weight (0.152667ms)
+✔ 12 missing real source link is low weight (0.079792ms)
+✔ 13 lower weight cannot replace curated evidence (0.231042ms)
+✔ 14 older disclosure cannot replace later target (0.161875ms)
+✔ 15 missing disclosure cannot replace dated target (0.149541ms)
+✔ 16 update target must be same claim (0.133333ms)
+✔ 17 update target must be same scope (0.125875ms)
+✔ 18 unsupported quote is blocked (0.118375ms)
+✔ 19 numeric hallucination is blocked (0.1255ms)
+✔ 20 unit must occur in source quote (0.126083ms)
+✔ 21 invalid date and timezone missing rejected (0.032042ms)
+✔ 22 updatedAt cannot predate disclosure (0.146083ms)
+✔ 23 same company other project only weak candidate (0.725916ms)
+✔ 24 same company and object suggest candidate but no auto merge (0.080125ms)
+✔ 25 no matching subject yields no candidates (0.354791ms)
+✔ 26 empty and overlong inputs are rejected (0.074917ms)
+✔ 27 rules distinguish opinion, inference and rumor (0.278458ms)
+✔ 28 deterministic promise never classified as fact (0.038417ms)
+✔ 29 financial promise cannot be submitted as fact value (0.149875ms)
+✔ 30 malicious source links rejected (0.086417ms)
+✔ 31 forged import snapshot rebuilt from actual evidence (0.382459ms)
+✔ 32 mixed real/synthetic import rejected (0.127333ms)
+✔ 33 malformed import does not validate (0.044958ms)
+✔ 34 historical dataset marked stale independent of ingestion (0.101792ms)
+✔ 35 same scope different units stays conflict (0.225583ms)
+✔ 36 different scopes do not falsely conflict (0.288583ms)
+✔ 37 rumor update cannot override fact evidence (0.132ms)
+✔ 38 duplicate statement IDs rejected (0.130125ms)
+✔ 39 explicit unrelated object mention is not positive match (0.068625ms)
+✔ 40 unverified secondary news alone cannot count as direct fact evidence (0.0675ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.768542
+
+> trace-submission-03@1.0.0 build
+> node scripts/build.mjs
+
+Built self-contained Worker ESM; browser assets embedded.
+
+> trace-submission-03@1.0.0 validate
+> npm --prefix app run validate
+
+
+> trace-event-evidence@1.0.0 validate
+> node scripts/validate-artifact.mjs
+
+Artifact is valid ESM and exports default.fetch

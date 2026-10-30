@@ -1,0 +1,7 @@
+{
+  "name": "trace-event-evidence", "version": "1.0.0", "private": true, "type": "module",
+  "description": "投资事件情报与证据时间线：主张级证据、版本与可追溯工作台",
+  "engines": {"node": ">=22"},
+  "scripts": {"dev": "node --env-file-if-exists=.env scripts/server.mjs", "start": "node --env-file-if-exists=.env scripts/server.mjs", "build": "node scripts/build.mjs", "test": "node --test tests/*.test.mjs", "validate": "node scripts/validate-artifact.mjs", "check": "npm test && npm run build && npm run validate"},
+  "devDependencies": {"esbuild": "0.25.12"}
+}

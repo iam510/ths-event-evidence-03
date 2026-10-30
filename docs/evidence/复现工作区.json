@@ -1,0 +1,796 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "evt-haijia",
+      "title": "海岬储能项目合作与投资口径",
+      "subject": "澄明能源",
+      "object": "海岬储能项目",
+      "type": "项目合作",
+      "aliases": [
+        "澄明"
+      ],
+      "scope": "构造案例 · 无真实证券代码",
+      "isSynthetic": true,
+      "claims": [
+        {
+          "id": "agreement",
+          "label": "协议签署状态"
+        },
+        {
+          "id": "amount",
+          "label": "项目总投资口径"
+        },
+        {
+          "id": "earnings",
+          "label": "业绩影响判断"
+        }
+      ],
+      "relations": [
+        {
+          "company": "澄明能源",
+          "role": "项目合作主体",
+          "basis": "构造公告中披露签署框架协议",
+          "materialId": "en-ann"
+        },
+        {
+          "company": "海岬产业发展",
+          "role": "交易对方",
+          "basis": "构造合作方说明中的项目参与方",
+          "materialId": "en-counter"
+        }
+      ],
+      "materials": [
+        {
+          "id": "en-rumor",
+          "title": "社交平台出现项目合作传闻",
+          "source": "构造社交帖",
+          "sourceType": "social",
+          "text": "网传澄明能源已签署海岬储能项目协议，总投资10亿元。未经证实。",
+          "publishedAt": "2026-10-21T09:00:00+08:00",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "en-rumor",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "en-r-agreement",
+              "claimId": "agreement",
+              "text": "网传澄明能源已签署海岬储能项目协议，总投资10亿元。",
+              "value": "已签署框架协议",
+              "quote": "网传澄明能源已签署海岬储能项目协议，总投资10亿元。",
+              "kind": "rumor",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            },
+            {
+              "id": "en-r-amount",
+              "claimId": "amount",
+              "text": "网传澄明能源已签署海岬储能项目协议，总投资10亿元。",
+              "value": "10",
+              "quote": "网传澄明能源已签署海岬储能项目协议，总投资10亿元。",
+              "kind": "rumor",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "亿元",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "en-repost",
+          "title": "资讯站转载同一传闻",
+          "source": "构造资讯站",
+          "sourceType": "news",
+          "text": "转载构造社交帖：网传澄明能源已签署海岬储能项目协议，总投资10亿元；仍待公告确认。",
+          "publishedAt": "2026-10-21T10:30:00+08:00",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "en-rumor",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "en-rp-amount",
+              "claimId": "amount",
+              "text": "网传澄明能源已签署海岬储能项目协议，总投资10亿元；",
+              "value": "10",
+              "quote": "网传澄明能源已签署海岬储能项目协议，总投资10亿元；",
+              "kind": "rumor",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "亿元",
+              "targetId": null,
+              "validUntil": null
+            }
+          ],
+          "derivedFrom": "en-rumor"
+        },
+        {
+          "id": "en-ann",
+          "title": "公司披露框架协议，投资口径为10亿元",
+          "source": "构造公司公告",
+          "sourceType": "announcement",
+          "text": "澄明能源已签署海岬储能项目框架协议。项目总投资10亿元，尚需履行后续审批，框架协议不构成业绩承诺。",
+          "publishedAt": "2026-10-22T18:00:00+08:00",
+          "occurredAt": "2026-10-22",
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "en-ann",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "en-a-agreement",
+              "claimId": "agreement",
+              "text": "澄明能源已签署海岬储能项目框架协议。",
+              "value": "已签署框架协议",
+              "quote": "澄明能源已签署海岬储能项目框架协议。",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            },
+            {
+              "id": "en-a-amount",
+              "claimId": "amount",
+              "text": "项目总投资10亿元，尚需履行后续审批，框架协议不构成业绩承诺。",
+              "value": "10",
+              "quote": "项目总投资10亿元，尚需履行后续审批，框架协议不构成业绩承诺。",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "亿元",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "en-counter",
+          "title": "合作方披露投资额8亿元，口径出现冲突",
+          "source": "构造合作方说明",
+          "sourceType": "announcement",
+          "text": "海岬产业发展说明：参与的海岬储能项目总投资8亿元，为项目整体计划金额，仍待审批。",
+          "publishedAt": "2026-10-23T10:00:00+08:00",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "en-counter",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "en-c-amount",
+              "claimId": "amount",
+              "text": "参与的海岬储能项目总投资8亿元，为项目整体计划金额，仍待审批。",
+              "value": "8",
+              "quote": "参与的海岬储能项目总投资8亿元，为项目整体计划金额，仍待审批。",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "亿元",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "en-research",
+          "title": "研究观点讨论未来业绩影响",
+          "source": "构造研究札记",
+          "sourceType": "research",
+          "text": "我们认为海岬储能项目有望改善澄明能源未来业务结构，但项目审批、建设和收入确认仍有不确定性。",
+          "publishedAt": "2026-10-23T15:30:00+08:00",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "en-research",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "en-view",
+              "claimId": "earnings",
+              "text": "我们认为海岬储能项目有望改善澄明能源未来业务结构，但项目审批、建设和收入确认仍有不确定性。",
+              "value": "有望改善业务结构，尚未核实",
+              "quote": "我们认为海岬储能项目有望改善澄明能源未来业务结构，但项目审批、建设和收入确认仍有不确定性。",
+              "kind": "opinion",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "title": "公司更正海岬项目总投资金额",
+          "source": "构造公司更正公告",
+          "sourceType": "announcement",
+          "url": "",
+          "text": "澄明能源更正：海岬储能项目总投资应为8亿元，前次披露的10亿元系录入错误。框架协议签署状态不变。",
+          "publishedAt": "2026-10-24T18:00:00+08:00",
+          "occurredAt": "",
+          "updatedAt": "",
+          "independentGroup": "origin-920172ac-c938-428b-8985-fb7607d14e1d",
+          "derivedFrom": null,
+          "isSynthetic": true,
+          "id": "material-fd51bea7-7dbe-4526-a11c-4974810d2344",
+          "ingestedAt": "2026-10-30T14:19:10.283Z",
+          "sourceCheck": "curated",
+          "statements": [
+            {
+              "claimId": "amount",
+              "quote": "海岬储能项目总投资应为8亿元，前次披露的10亿元系录入错误。",
+              "kind": "fact",
+              "stance": "correct",
+              "targetId": "en-a-amount",
+              "value": "8",
+              "unit": "亿元",
+              "scope": "整体",
+              "validUntil": null,
+              "id": "statement-6787fdd9-548d-428d-8cb3-fdd07630df9d",
+              "text": "海岬储能项目总投资应为8亿元，前次披露的10亿元系录入错误。"
+            }
+          ],
+          "analysis": {
+            "mode": "rules",
+            "model": null,
+            "promptVersion": null,
+            "reviewed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "evt-lichen",
+      "title": "临川一期采购传闻与否认",
+      "subject": "临川医疗",
+      "object": "一期采购项目",
+      "type": "采购合同",
+      "aliases": [
+        "临川"
+      ],
+      "scope": "构造案例 · 否认与有效期边界",
+      "isSynthetic": true,
+      "claims": [
+        {
+          "id": "purchase",
+          "label": "采购合同是否签订"
+        },
+        {
+          "id": "window",
+          "label": "意向沟通有效期"
+        }
+      ],
+      "relations": [
+        {
+          "company": "临川医疗",
+          "role": "传闻涉及主体",
+          "basis": "构造公司澄清材料明确回应该采购事项",
+          "materialId": "med-deny"
+        }
+      ],
+      "materials": [
+        {
+          "id": "med-rumor",
+          "title": "一期采购项目签约传闻",
+          "source": "构造社交帖",
+          "sourceType": "social",
+          "text": "网传临川医疗已签订一期采购项目合同，金额尚不明确。",
+          "publishedAt": "2026-10-18T08:30:00+08:00",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "med-rumor",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "med-r",
+              "claimId": "purchase",
+              "text": "网传临川医疗已签订一期采购项目合同，金额尚不明确。",
+              "value": "已签订采购合同",
+              "quote": "网传临川医疗已签订一期采购项目合同，金额尚不明确。",
+              "kind": "rumor",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "med-deny",
+          "title": "公司称尚未签订采购合同",
+          "source": "构造公司澄清",
+          "sourceType": "announcement",
+          "text": "截至本说明披露日，临川医疗尚未签订一期采购项目合同。双方意向沟通有效期至2026年10月20日，期满不代表永久停止合作。",
+          "publishedAt": "2026-10-19T12:00:00+08:00",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "med-deny",
+          "url": "",
+          "sourceCheck": "curated",
+          "isSynthetic": true,
+          "statements": [
+            {
+              "id": "med-d",
+              "claimId": "purchase",
+              "text": "临川医疗尚未签订一期采购项目合同。",
+              "value": "尚未签订采购合同",
+              "quote": "临川医疗尚未签订一期采购项目合同。",
+              "kind": "fact",
+              "stance": "deny",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            },
+            {
+              "id": "med-window",
+              "claimId": "window",
+              "text": "双方意向沟通有效期至2026年10月20日，期满不代表永久停止合作。",
+              "value": "意向沟通窗口",
+              "quote": "双方意向沟通有效期至2026年10月20日，期满不代表永久停止合作。",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": "2026-10-20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt-msft",
+      "title": "微软收购动视暴雪：监管与交割进程",
+      "subject": "微软",
+      "object": "动视暴雪",
+      "type": "并购",
+      "aliases": [
+        "Microsoft",
+        "MSFT",
+        "Activision"
+      ],
+      "scope": "真实历史案例 · 资料截至 2023-10-13，非实时新闻",
+      "isSynthetic": false,
+      "claims": [
+        {
+          "id": "deal",
+          "label": "交易计划"
+        },
+        {
+          "id": "uk",
+          "label": "英国监管进展"
+        },
+        {
+          "id": "closed",
+          "label": "交易交割状态"
+        }
+      ],
+      "relations": [
+        {
+          "company": "微软 · MSFT",
+          "role": "收购方",
+          "basis": "微软原始披露宣布拟收购动视暴雪",
+          "materialId": "ms-plan"
+        },
+        {
+          "company": "动视暴雪 · 原 ATVI",
+          "role": "被收购方（历史标的）",
+          "basis": "Xbox 原始披露欢迎动视暴雪团队加入",
+          "materialId": "ms-close"
+        }
+      ],
+      "materials": [
+        {
+          "id": "ms-plan",
+          "title": "微软宣布拟收购动视暴雪",
+          "source": "Microsoft Source",
+          "sourceType": "announcement",
+          "text": "Microsoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion,",
+          "publishedAt": "2022-01-18",
+          "occurredAt": null,
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "ms-plan",
+          "url": "https://news.microsoft.com/source/2022/01/18/microsoft-to-acquire-activision-blizzard-to-bring-the-joy-and-community-of-gaming-to-everyone-across-every-device/",
+          "sourceCheck": "curated",
+          "isSynthetic": false,
+          "statements": [
+            {
+              "id": "ms-plan-s",
+              "claimId": "deal",
+              "text": "Microsoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion,",
+              "value": "宣布收购计划；原始披露估值687亿美元（包含净现金）",
+              "quote": "Microsoft will acquire Activision Blizzard for $95.00 per share, in an all-cash transaction valued at $68.7 billion,",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "ms-block",
+          "title": "CMA 阻止原交易方案",
+          "source": "英国竞争与市场管理局 CMA",
+          "sourceType": "regulator",
+          "text": "The CMA has prevented Microsoft’s proposed purchase of Activision over concerns the deal would alter the future",
+          "publishedAt": "2023-04-26",
+          "occurredAt": "2023-04-26",
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "ms-block",
+          "url": "https://www.gov.uk/government/news/microsoft-activision-deal-prevented-to-protect-innovation-and-choice-in-cloud-gaming",
+          "sourceCheck": "curated",
+          "isSynthetic": false,
+          "statements": [
+            {
+              "id": "ms-block-s",
+              "claimId": "uk",
+              "text": "The CMA has prevented Microsoft’s proposed purchase of Activision over concerns the deal would alter the future",
+              "value": "原交易方案被阻止",
+              "quote": "The CMA has prevented Microsoft’s proposed purchase of Activision over concerns the deal would alter the future",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "英国监管审查",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "ms-clear",
+          "title": "CMA 批准剥离云游戏权利后的较窄交易",
+          "source": "英国竞争与市场管理局 CMA",
+          "sourceType": "regulator",
+          "text": "The new deal for Microsoft to buy Activision without cloud gaming rights has been cleared",
+          "publishedAt": "2023-10-13",
+          "occurredAt": "2023-10-13",
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "ms-clear",
+          "url": "https://www.gov.uk/government/news/microsoft-concession-a-gamechanger-that-will-promote-competition",
+          "sourceCheck": "curated",
+          "isSynthetic": false,
+          "statements": [
+            {
+              "id": "ms-clear-s",
+              "claimId": "uk",
+              "text": "The new deal for Microsoft to buy Activision without cloud gaming rights has been cleared",
+              "value": "调整后的较窄交易获批准",
+              "quote": "The new deal for Microsoft to buy Activision without cloud gaming rights has been cleared",
+              "kind": "fact",
+              "stance": "update",
+              "scope": "英国监管审查",
+              "unit": "",
+              "targetId": "ms-block-s",
+              "validUntil": null
+            }
+          ]
+        },
+        {
+          "id": "ms-close",
+          "title": "Xbox 披露动视暴雪团队正式加入",
+          "source": "Xbox Wire · Phil Spencer",
+          "sourceType": "announcement",
+          "text": "And today, we officially welcome Activision Blizzard and their teams to Xbox.",
+          "publishedAt": "2023-10-13",
+          "occurredAt": "2023-10-13",
+          "updatedAt": null,
+          "ingestedAt": "2026-10-30T14:10:00Z",
+          "independentGroup": "ms-close",
+          "url": "https://news.xbox.com/en-us/2023/10/13/xbox-activision-blizzard/",
+          "sourceCheck": "curated",
+          "isSynthetic": false,
+          "statements": [
+            {
+              "id": "ms-close-s",
+              "claimId": "closed",
+              "text": "And today, we officially welcome Activision Blizzard and their teams to Xbox.",
+              "value": "动视暴雪团队正式加入 Xbox",
+              "quote": "And today, we officially welcome Activision Blizzard and their teams to Xbox.",
+              "kind": "fact",
+              "stance": "support",
+              "scope": "整体",
+              "unit": "",
+              "targetId": null,
+              "validUntil": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evt-146e8e4e-0e3c-4b21-8254-b05444a62eb9",
+      "title": "澄明能源 · 青原风电项目",
+      "subject": "澄明能源",
+      "object": "青原风电项目",
+      "type": "项目合作",
+      "aliases": [],
+      "scope": "用户构造案例",
+      "isSynthetic": true,
+      "claims": [
+        {
+          "id": "new-main",
+          "label": "事件进展"
+        }
+      ],
+      "materials": [
+        {
+          "title": "澄明能源另一项目进展",
+          "source": "构造公司说明",
+          "sourceType": "announcement",
+          "url": "",
+          "text": "澄明能源披露青原风电项目进入前期论证阶段。本说明不涉及海岬储能项目。",
+          "publishedAt": "2026-10-26T12:00:00+08:00",
+          "occurredAt": "",
+          "updatedAt": "",
+          "independentGroup": "origin-c319b816-4221-4141-90b1-9db40493ae83",
+          "derivedFrom": null,
+          "isSynthetic": true,
+          "id": "material-c999d163-6393-4a71-8508-75cabee6a0ff",
+          "ingestedAt": "2026-10-30T14:25:38.731Z",
+          "sourceCheck": "curated",
+          "statements": [
+            {
+              "claimId": "new-main",
+              "quote": "澄明能源披露青原风电项目进入前期论证阶段。",
+              "kind": "fact",
+              "stance": "support",
+              "targetId": null,
+              "value": "进入前期论证阶段",
+              "unit": "",
+              "scope": "整体",
+              "validUntil": null,
+              "id": "statement-3b73deb2-1d97-4150-b04a-56dad4ac18a4",
+              "text": "澄明能源披露青原风电项目进入前期论证阶段。"
+            }
+          ],
+          "analysis": {
+            "mode": "rules",
+            "model": null,
+            "promptVersion": null,
+            "reviewed": true
+          }
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "auditLog": [
+    {
+      "id": "change-675dad04-037f-4b95-ad04-a391dd0cbefa",
+      "eventId": "evt-haijia",
+      "materialId": "material-fd51bea7-7dbe-4526-a11c-4974810d2344",
+      "at": "2026-10-30T14:19:10.283Z",
+      "ruleVersion": "claims-v1.0",
+      "before": [
+        {
+          "id": "agreement",
+          "label": "协议签署状态",
+          "status": "supported",
+          "labelStatus": "有直接依据",
+          "value": "已签署框架协议",
+          "unit": "",
+          "scope": "整体",
+          "alternatives": [
+            "已签署框架协议（整体）"
+          ],
+          "evidenceIds": [
+            "en-r-agreement",
+            "en-a-agreement"
+          ],
+          "activeIds": [
+            "en-r-agreement",
+            "en-a-agreement"
+          ],
+          "supersededIds": [],
+          "independentCount": 2,
+          "rejectedUpdates": [],
+          "reason": "存在可定位的直接事实陈述；仍受来源核验和适用范围约束。"
+        },
+        {
+          "id": "amount",
+          "label": "项目总投资口径",
+          "status": "conflict",
+          "labelStatus": "证据冲突",
+          "value": "8",
+          "unit": "亿元",
+          "scope": "整体",
+          "alternatives": [
+            "10亿元（整体）",
+            "8亿元（整体）"
+          ],
+          "evidenceIds": [
+            "en-r-amount",
+            "en-rp-amount",
+            "en-a-amount",
+            "en-c-amount"
+          ],
+          "activeIds": [
+            "en-r-amount",
+            "en-rp-amount",
+            "en-a-amount",
+            "en-c-amount"
+          ],
+          "supersededIds": [],
+          "independentCount": 3,
+          "rejectedUpdates": [],
+          "reason": "同一适用范围存在相反事实陈述或不同数值，需人工核对。"
+        },
+        {
+          "id": "earnings",
+          "label": "业绩影响判断",
+          "status": "pending",
+          "labelStatus": "待核实",
+          "value": "有望改善业务结构，尚未核实",
+          "unit": "",
+          "scope": "整体",
+          "alternatives": [],
+          "evidenceIds": [
+            "en-view"
+          ],
+          "activeIds": [
+            "en-view"
+          ],
+          "supersededIds": [],
+          "independentCount": 1,
+          "rejectedUpdates": [],
+          "reason": "现有信息不足以核实，观点、推测和传闻不构成事实确认。"
+        }
+      ],
+      "after": [
+        {
+          "id": "agreement",
+          "label": "协议签署状态",
+          "status": "supported",
+          "labelStatus": "有直接依据",
+          "value": "已签署框架协议",
+          "unit": "",
+          "scope": "整体",
+          "alternatives": [
+            "已签署框架协议（整体）"
+          ],
+          "evidenceIds": [
+            "en-r-agreement",
+            "en-a-agreement"
+          ],
+          "activeIds": [
+            "en-r-agreement",
+            "en-a-agreement"
+          ],
+          "supersededIds": [],
+          "independentCount": 2,
+          "rejectedUpdates": [],
+          "reason": "存在可定位的直接事实陈述；仍受来源核验和适用范围约束。"
+        },
+        {
+          "id": "amount",
+          "label": "项目总投资口径",
+          "status": "supported",
+          "labelStatus": "有直接依据",
+          "value": "8",
+          "unit": "亿元",
+          "scope": "整体",
+          "alternatives": [
+            "8亿元（整体）"
+          ],
+          "evidenceIds": [
+            "en-r-amount",
+            "en-rp-amount",
+            "en-a-amount",
+            "en-c-amount",
+            "statement-6787fdd9-548d-428d-8cb3-fdd07630df9d"
+          ],
+          "activeIds": [
+            "en-r-amount",
+            "en-rp-amount",
+            "en-c-amount",
+            "statement-6787fdd9-548d-428d-8cb3-fdd07630df9d"
+          ],
+          "supersededIds": [
+            "en-a-amount"
+          ],
+          "independentCount": 3,
+          "rejectedUpdates": [],
+          "reason": "存在可定位的直接事实陈述；仍受来源核验和适用范围约束。"
+        },
+        {
+          "id": "earnings",
+          "label": "业绩影响判断",
+          "status": "pending",
+          "labelStatus": "待核实",
+          "value": "有望改善业务结构，尚未核实",
+          "unit": "",
+          "scope": "整体",
+          "alternatives": [],
+          "evidenceIds": [
+            "en-view"
+          ],
+          "activeIds": [
+            "en-view"
+          ],
+          "supersededIds": [],
+          "independentCount": 1,
+          "rejectedUpdates": [],
+          "reason": "现有信息不足以核实，观点、推测和传闻不构成事实确认。"
+        }
+      ]
+    },
+    {
+      "id": "change-d4b6eb1b-c35f-4241-8614-f2664b4ba541",
+      "eventId": "evt-146e8e4e-0e3c-4b21-8254-b05444a62eb9",
+      "materialId": "material-c999d163-6393-4a71-8508-75cabee6a0ff",
+      "at": "2026-10-30T14:25:38.731Z",
+      "ruleVersion": "claims-v1.0",
+      "before": [
+        {
+          "id": "new-main",
+          "label": "事件进展",
+          "status": "pending",
+          "labelStatus": "待核实",
+          "value": "暂无可用结论",
+          "unit": "",
+          "scope": "",
+          "alternatives": [],
+          "evidenceIds": [],
+          "activeIds": [],
+          "supersededIds": [],
+          "independentCount": 0,
+          "rejectedUpdates": [],
+          "reason": "现有信息不足以核实，观点、推测和传闻不构成事实确认。"
+        }
+      ],
+      "after": [
+        {
+          "id": "new-main",
+          "label": "事件进展",
+          "status": "supported",
+          "labelStatus": "有直接依据",
+          "value": "进入前期论证阶段",
+          "unit": "",
+          "scope": "整体",
+          "alternatives": [
+            "进入前期论证阶段（整体）"
+          ],
+          "evidenceIds": [
+            "statement-3b73deb2-1d97-4150-b04a-56dad4ac18a4"
+          ],
+          "activeIds": [
+            "statement-3b73deb2-1d97-4150-b04a-56dad4ac18a4"
+          ],
+          "supersededIds": [],
+          "independentCount": 1,
+          "rejectedUpdates": [],
+          "reason": "存在可定位的直接事实陈述；仍受来源核验和适用范围约束。"
+        }
+      ]
+    }
+  ]
+}

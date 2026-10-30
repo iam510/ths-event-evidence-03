@@ -1,0 +1,13 @@
+import { build } from 'esbuild';
+import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+const here = new URL('../', import.meta.url);
+await mkdir(new URL('dist/server/',here),{recursive:true});
+await mkdir(new URL('dist/.openai/',here),{recursive:true});
+const files = {'/':['public/index.html','text/html; charset=utf-8'],'/app.js':['src/app.js','text/javascript; charset=utf-8'],'/core.js':['src/core.js','text/javascript; charset=utf-8'],'/styles.css':['public/styles.css','text/css; charset=utf-8'],'/seed.json':['data/seed.json','application/json; charset=utf-8']};
+const assets = {};
+for(const [url,[path,type]] of Object.entries(files)) assets[url]={body:await readFile(new URL(path,here),'utf8'),type};
+await writeFile(new URL('worker/assets.generated.js',here),`export default ${JSON.stringify(assets)};\n`);
+await build({entryPoints:[fileURLToPath(new URL('worker/index.js',here))],outfile:fileURLToPath(new URL('dist/server/index.js',here)),bundle:true,format:'esm',platform:'browser',target:'es2022',minify:false});
+await copyFile(new URL('../.openai/hosting.json',here),new URL('dist/.openai/hosting.json',here));
+console.log('Built self-contained Worker ESM; browser assets embedded.');
