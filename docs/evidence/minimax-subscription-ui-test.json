@@ -1,0 +1,56 @@
+{
+  "verifiedAt": "2026-10-30T15:30:38.704Z",
+  "method": "Chrome UI -> public app -> real MiniMax -> human review -> save -> reload -> source drawer -> export",
+  "provider": "MiniMax",
+  "model": "MiniMax-M3.1-Flash",
+  "environmentRevision": 2,
+  "input": "澄明能源公告：海岬储能项目总投资8亿元，仍须审批。公司预计该项目可能改善未来业务结构，但不作收益承诺。",
+  "rawSuggestionQuotes": [
+    "海岬储能项目总投资8亿元",
+    "仍须审批",
+    "公司预计该项目可能改善未来业务结构",
+    "不作收益承诺"
+  ],
+  "humanReview": [
+    "Manually normalized first value to 8 and unit to 亿元.",
+    "Removed 仍须审批 because it was mapped to agreement signing.",
+    "Removed 不作收益承诺 to avoid treating a disclaimer as performance evidence."
+  ],
+  "savedStatements": [
+    {
+      "quote": "海岬储能项目总投资8亿元",
+      "text": "海岬储能项目总投资8亿元",
+      "value": "8",
+      "kind": "fact",
+      "stance": "support",
+      "unit": "亿元",
+      "scope": "整体",
+      "targetId": null,
+      "validUntil": null,
+      "id": "statement-c22baa4d-0761-44de-8bec-1aee06f160ac",
+      "claimId": "amount"
+    },
+    {
+      "quote": "公司预计该项目可能改善未来业务结构",
+      "text": "公司预计该项目可能改善未来业务结构",
+      "value": "公司预计该项目可能改善未来业务结构",
+      "kind": "inference",
+      "stance": "support",
+      "unit": "",
+      "scope": "整体",
+      "targetId": null,
+      "validUntil": null,
+      "id": "statement-a748c7ea-4044-4b00-92c0-b6ad1bd2f1af",
+      "claimId": "earnings"
+    }
+  ],
+  "sourceQuotesMatch": true,
+  "savedMaterialId": "material-3905b740-1774-4b66-a527-4ae6ac095d0f",
+  "reloadAndSourceDrawerVerified": true,
+  "afterStatuses": {
+    "agreement": "supported",
+    "amount": "conflict",
+    "earnings": "pending"
+  },
+  "scope": "One synthetic-material end-to-end success. Raw upstream response/HTTP status was not captured. Not an accuracy claim."
+}

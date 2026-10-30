@@ -1,0 +1,25 @@
+{
+  "verifiedAt": "2026-10-30T15:27:46.635165+00:00",
+  "provider": "MiniMax",
+  "keyType": "M Plan subscription (value omitted)",
+  "model": "MiniMax-M3.1-Flash",
+  "baseUrl": "https://api.minimax.cn/v1",
+  "environmentRevision": 2,
+  "secrets": [
+    {
+      "key": "MODEL_API_KEY",
+      "isSecret": true
+    },
+    {
+      "key": "MODEL_BASE_URL",
+      "isSecret": true
+    },
+    {
+      "key": "MODEL_NAME",
+      "isSecret": true
+    }
+  ],
+  "runtimeVersion": 4,
+  "deploymentId": "appgdep_6ae4b765b47c8191b03a303213815f73",
+  "credentialValuesPersistedLocally": false
+}

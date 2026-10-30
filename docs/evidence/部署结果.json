@@ -2,11 +2,11 @@
   "project_id": "appgprj_6ae4a76c546c81918d70b493c1bc1c6a",
   "version_number": 4,
   "version_id": "appgprj_6ae4a76c546c81918d70b493c1bc1c6a~appgver_505df69c1f0081918698fd002523f460",
-  "deployment_id": "appgdep_6ae4b37480b481918cb08ab2588e75e1",
+  "deployment_id": "appgdep_6ae4b765b47c8191b03a303213815f73",
   "status": "succeeded",
   "url": "https://trace-event-evidence.green-trout-2026.chatgpt.site",
   "source_commit": "81e4bfee01b53b5a53763db841a958c3c671d438",
   "access_mode": "public",
-  "env_set_revision": 1,
-  "updated_at": "2026-10-30T15:10:58.272402+00:00"
+  "env_set_revision": 2,
+  "updated_at": "2026-10-30T15:27:46.635165+00:00"
 }
