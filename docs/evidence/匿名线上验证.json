@@ -24,7 +24,8 @@
       "status": 200,
       "anonymous": true,
       "sourceMatches": true,
-      "sha256": "7f15173f2cdd3852c1006da4d416db65582fa9029ef830a36efb28112e016007"
+      "sha256": "c6100454fe7e007d6530602013655c316ee1a339a9cf961aa3b0b9547e84178d",
+      "reverifiedAt": "2026-10-30T14:46:18.240Z"
     },
     {
       "route": "/styles.css",
@@ -58,5 +59,6 @@
         "code": "MODEL_NOT_CONFIGURED"
       }
     }
-  ]
+  ],
+  "finalRuntimeVersion": 3
 }
