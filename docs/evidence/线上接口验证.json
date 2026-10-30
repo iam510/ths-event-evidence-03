@@ -1,0 +1,57 @@
+{
+  "verifiedAt": "2026-10-30T14:36:46.631Z",
+  "access": "Sites supported service bearer; not an anonymous browser test",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 8727,
+      "hasProductTitle": true
+    },
+    {
+      "path": "/app.js",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 42959
+    },
+    {
+      "path": "/core.js",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "bytes": 15074
+    },
+    {
+      "path": "/styles.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 25457
+    },
+    {
+      "path": "/seed.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "bytes": 18632
+    },
+    {
+      "path": "/api/config",
+      "status": 200,
+      "contentType": "application/json",
+      "bytes": 84,
+      "config": {
+        "aiConfigured": false,
+        "storage": "browser-local",
+        "liveFeeds": false,
+        "version": "1.0.0"
+      }
+    },
+    {
+      "path": "/api/analyze",
+      "status": 503,
+      "result": {
+        "error": "AI 尚未配置。可切换到规则分析，并逐条人工核对。",
+        "code": "MODEL_NOT_CONFIGURED"
+      }
+    }
+  ]
+}
