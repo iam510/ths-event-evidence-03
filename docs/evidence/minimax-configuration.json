@@ -1,0 +1,59 @@
+{
+  "version": "1.1.0",
+  "provider": "MiniMax",
+  "model": "MiniMax-M3.1-Flash",
+  "keyLabel": "wym",
+  "credentialStorage": "Sites server-only secret; not present in source or submission",
+  "environmentRevision": 1,
+  "secretKeys": [
+    {
+      "name": "MODEL_API_KEY",
+      "isSecret": true,
+      "valueRedacted": true
+    },
+    {
+      "name": "MODEL_BASE_URL",
+      "isSecret": true,
+      "valueRedacted": true
+    },
+    {
+      "name": "MODEL_NAME",
+      "isSecret": true,
+      "valueRedacted": true
+    }
+  ],
+  "deployment": {
+    "versionNumber": 4,
+    "id": "appgdep_6ae4b37480b481918cb08ab2588e75e1",
+    "status": "succeeded",
+    "versionId": "appgprj_6ae4a76c546c81918d70b493c1bc1c6a~appgver_505df69c1f0081918698fd002523f460",
+    "sourceCommit": "81e4bfee01b53b5a53763db841a958c3c671d438",
+    "environmentRevision": 1,
+    "url": "https://trace-event-evidence.green-trout-2026.chatgpt.site",
+    "updatedAt": "2026-10-30T15:10:58.272402+00:00"
+  },
+  "validation": {
+    "localTests": 68,
+    "browserResult": "MODEL_INSUFFICIENT_BALANCE / HTTP 402 from provider; user input preserved; existing conclusions unchanged",
+    "liveSuccess": false
+  },
+  "publicConfigVerification": {
+    "at": "2026-10-30T15:18:03.979Z",
+    "httpStatus": 200,
+    "body": {
+      "aiConfigured": true,
+      "provider": "MiniMax",
+      "model": "MiniMax-M3.1-Flash",
+      "storage": "browser-local",
+      "liveFeeds": false,
+      "version": "1.1.0",
+      "aiLimits": {
+        "perMinute": 3,
+        "perDay": 30,
+        "globalPerDay": 100,
+        "maxConcurrent": 2,
+        "scope": "worker-instance-best-effort"
+      }
+    }
+  }
+}
