@@ -7,8 +7,8 @@
 - 密钥：用户指定个人 M Plan 订阅 Key，值省略；仅存于 Sites 服务端 Secret。
 - 端点：`https://api.minimax.cn/v1/chat/completions`。
 - 模型：`MiniMax-M3.1-Flash`。
-- 环境变量：`MODEL_BASE_URL`、`MODEL_NAME`、`MODEL_API_KEY`，均为 Secret，环境 revision 2。
-- 应用运行版本4；仅替换 MODEL_API_KEY 后重新部署同一版本，运行代码未变。
+- 环境变量：`MODEL_BASE_URL`、`MODEL_NAME`、`MODEL_API_KEY`，均为 Secret；MiniMax密钥在环境revision2更换，v1.2增加扶摇Secret后整体环境为revision3。
+- MiniMax原始成功验证为运行版本4；当前v1.2运行版本5增加扶摇资讯，保留同一模型配置，另有真实资讯到AI分析成功记录，见[扶摇接入与验证](./扶摇接入与验证.md)。
 - 公开配置接口只返回提供商、模型与限流说明，不返回密钥。
 - 提示词：`extract-v1.1`。参数为 `reasoning_effort=low`、`reasoning_split=true`、`max_completion_tokens=4096`；逐字验证引文。
 

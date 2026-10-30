@@ -1,0 +1,29 @@
+{
+  "verifiedAt": "2026-10-30T16:11:52.006577+00:00",
+  "authentication": "none; curl POST -> public Worker -> Fuyao",
+  "deploymentVersion": 5,
+  "envRevision": 3,
+  "results": [
+    {
+      "kind": "stock",
+      "status": 200,
+      "provider": "扶摇",
+      "count": 20,
+      "capturedAt": "2026-10-30T16:10:39.146Z",
+      "cached": true,
+      "requestId": "4d0449fec80346e4afe6a9f17304ab0a",
+      "sourceTimesPreserved": true
+    },
+    {
+      "kind": "flash",
+      "status": 200,
+      "provider": "扶摇",
+      "count": 20,
+      "capturedAt": "2026-10-30T16:10:52.446Z",
+      "cached": false,
+      "requestId": "ef5d3a449ec444339ed07071c5ea4611",
+      "sourceTimesPreserved": true
+    }
+  ],
+  "note": "Metadata only; no API keys or news body committed."
+}

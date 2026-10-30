@@ -1,0 +1,80 @@
+{
+  "verifiedAt": "2026-10-30T16:16:42.627197+00:00",
+  "method": "Native Chrome UI on public deployment v5; real Fuyao -> real MiniMax -> human review -> save -> reload -> relation source -> second-source merge -> UI export",
+  "eventId": "evt-a8a5cbe9-d4a3-4a65-bfdb-87e4050dc36f",
+  "materialCount": 2,
+  "eventCount": 4,
+  "materials": [
+    {
+      "id": "material-0d513b2d-21bf-49f8-8f6e-db55fdd7d7f4",
+      "providerItemId": "2_60362869",
+      "source": "长江证券",
+      "publishedAt": "2026-10-30T05:07:25.000Z",
+      "capturedAt": "2026-10-30T16:10:39.146Z",
+      "ingestedAt": "2026-10-30T16:12:42.461Z",
+      "occurredAt": "",
+      "updatedAt": "",
+      "independentGroup": "fuyao:stock:2_60362869",
+      "analysis": {
+        "mode": "ai",
+        "model": "MiniMax-M3.1-Flash",
+        "promptVersion": "extract-v1.1",
+        "reviewed": true
+      },
+      "statementValues": [
+        {
+          "value": "47.9",
+          "unit": "亿元",
+          "scope": "2026年前三季度营业收入",
+          "kind": "fact"
+        }
+      ]
+    },
+    {
+      "id": "material-4116d627-114f-4c09-8598-45161382f2c6",
+      "providerItemId": "2_60284049",
+      "source": "方正证券",
+      "publishedAt": "2026-10-26T13:13:46.000Z",
+      "capturedAt": "2026-10-30T16:14:58.167Z",
+      "ingestedAt": "2026-10-30T16:16:02.064Z",
+      "occurredAt": "",
+      "updatedAt": "",
+      "independentGroup": "fuyao:stock:2_60284049",
+      "analysis": {
+        "mode": "rules",
+        "model": null,
+        "promptVersion": null,
+        "reviewed": true
+      },
+      "statementValues": [
+        {
+          "value": "47.9",
+          "unit": "亿元",
+          "scope": "2026年前三季度营业收入",
+          "kind": "fact"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "company": "同花顺 · 300033.SZ",
+      "role": "被报道公司",
+      "basis": "同花顺发布2026年三季报",
+      "materialId": "material-0d513b2d-21bf-49f8-8f6e-db55fdd7d7f4",
+      "quoteVerified": true
+    }
+  ],
+  "quotesMatchSource": true,
+  "reloadVerified": true,
+  "relationEvidenceOpened": true,
+  "sameEventMergeVerified": true,
+  "finalStatus": "pending; news summaries not treated as confirmed facts",
+  "humanReview": [
+    "Normalized one numeric claim per source to 47.9, unit CNY 100 million, period 2026 first three quarters.",
+    "Removed incomplete opinion from MiniMax result; it was correctly labelled opinion but truncated upstream.",
+    "Entered event subject/object/type and quoted relationship basis manually.",
+    "Second source used rules (not AI); exact company and report period suggested the existing event."
+  ],
+  "scope": "Two real provider summaries; one real AI request. No accuracy/coverage claim. Full source body not copied into this report."
+}
