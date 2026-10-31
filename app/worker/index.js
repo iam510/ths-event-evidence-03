@@ -8,7 +8,7 @@ export default {
   let response;
   if(path==='/api/analyze') response = await guardedAnalysis(request,env,{actor:request.headers.get('cf-connecting-ip')||'unknown'});
   else if(path==='/api/feed') response = await feedRequest(request,env);
-  else if(path==='/api/config') response = Response.json({...publicModelConfig(env),feeds:feedConfig(env),liveFeeds:Boolean(env.FUYAO_API_KEY),version:'1.2.0'},{headers:{'cache-control':'no-store'}});
+  else if(path==='/api/config') response = Response.json({...publicModelConfig(env),feeds:feedConfig(env),liveFeeds:Boolean(env.FUYAO_API_KEY),version:'1.3.0'},{headers:{'cache-control':'no-store'}});
   else if(['GET','HEAD'].includes(request.method) && assets[path]) { const a = assets[path]; response=new Response(request.method==='HEAD'?null:a.body,{headers:{'content-type':a.type,'cache-control':'no-cache'}}); }
   else response=new Response('Not found',{status:404});
   for(const [key,value] of Object.entries(security)) response.headers.set(key,value);

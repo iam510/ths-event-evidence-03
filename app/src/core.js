@@ -1,5 +1,5 @@
 /** Shared browser/server domain logic. No provider or browser dependencies. */
-export const RULE_VERSION = 'claims-v1.0';
+export const RULE_VERSION = 'claims-v1.1';
 export const KINDS = { fact: '事实陈述', opinion: '观点', inference: '推测', rumor: '传闻' };
 export const SOURCE_TYPES = { announcement: '公司公告', regulator: '监管披露', news: '新闻报道', research: '研究观点', social: '社交传闻' };
 export const STATUS = { supported: '有直接依据', denied: '存在否认', conflict: '证据冲突', pending: '待核实', expired: '适用期已结束' };
@@ -9,7 +9,41 @@ export function safeUrl(value) { try { const u = new URL(value); return ['https:
 export function validTime(v) { if (v === null || v === '' || v === undefined) return true; if (typeof v !== 'string') return false; if (/^\d{4}-\d{2}-\d{2}$/.test(v)) { const t = new Date(`${v}T00:00:00Z`); return !isNaN(t) && t.toISOString().slice(0, 10) === v; } return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:\d{2})$/.test(v) && validTime(v.slice(0, 10)) && !isNaN(Date.parse(v)); }
 export function normalize(text) { return String(text).normalize('NFKC').toLowerCase().replace(/[\s\p{P}\p{S}]/gu, ''); }
 export function fingerprint(text) { return String(text).normalize('NFKC').toLowerCase().replace(/\s+/gu, ''); }
-export function restrictedClaim(text) { return /建议.{0,8}(买入|卖出)|保证.{0,8}(收益|上涨|下跌)|稳赚|必涨|必跌|确定.{0,4}(涨停|跌停)|guaranteed return|should buy|should sell/i.test(text) && !/不构成|不得|不能保证|否认|不承诺/.test(text); }
+export function restrictedClaim(text) {
+  return String(text).split(/[。！？!?；;，,\n]/u).some(clause=>{
+    const matches=clause.matchAll(/建议.{0,8}(?:买入|卖出)|保证.{0,8}(?:收益|上涨|下跌)|稳赚|必涨|必跌|确定.{0,4}(?:涨停|跌停)|guaranteed return|should buy|should sell/gi);
+    return [...matches].some(m=>{
+      const prefix=clause.slice(0,m.index);
+      const negated=/(?:不|未|不能|不得|无法|没有|否认|不作|不承诺|不构成)(?:[\s“"‘']|任何|作出|给予|所称|所谓|传闻中|网上所称)*$/.test(prefix)||/(?:not|no|never)\s+(?:a\s+)?$/i.test(prefix);
+      return !negated;
+    });
+  });
+}
+export function sourceText(value){return String(value??'').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi,'').replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|amp|lt|gt|quot|#39);/g,s=>({'&nbsp;':' ','&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'"}[s])).replace(/\s+/g,' ').trim();}
+export function createEvent(fields) {
+  for(const key of ['title','subject','object','type'])invariant(typeof fields[key]==='string'&&fields[key].trim()&&fields[key].length<=(key==='title'?500:200),'请完整填写新事件标题、主体公司、事件对象与类型');
+  invariant(typeof fields.isSynthetic==='boolean','事件缺少真实/构造标记');
+  return {id:uid('evt'),title:fields.title.trim(),subject:fields.subject.trim(),object:fields.object.trim(),type:fields.type.trim(),aliases:[],scope:fields.isSynthetic?'用户构造案例':'用户录入 · 待独立核验',isSynthetic:fields.isSynthetic,claims:[{id:'new-main',label:'事件进展'}],materials:[],relations:[]};
+}
+export function validateProvenance(m) {
+  if(!m.provenance)return;
+  const p=m.provenance,f=p.fields;
+  invariant(p.provider==='fuyao'&&['stock','flash'].includes(p.kind)&&typeof p.itemId==='string'&&p.itemId.length<=200&&f&&typeof f.summary==='string','取数来源记录格式无效');
+  invariant(m.capturedAt&&sourceText(f.summary).includes(m.text)&&m.url===f.url&&m.title===sourceText(f.title),'扶摇材料与原始摘要或来源链接不一致，请保持原始内容；其他材料请手工新建');
+  if(p.kind==='stock'&&f.source)invariant(m.source===sourceText(f.source),'扶摇材料发布来源与接口原字段不一致');
+  for(const [key,raw] of [['publishedAt',f.publicationMs],['updatedAt',f.updateMs]])if(raw!==null&&raw!==undefined)invariant(Number.isSafeInteger(raw)&&Date.parse(m[key])===raw,'扶摇来源时间与接口原字段不一致');
+}
+function numericTokens(text){return String(text).match(/-?\d+(?:,\d{3})*(?:\.\d+)?/g)||[];}
+function numericKey(token){const clean=token.replaceAll(',','');const negative=clean.startsWith('-');const [integer,fraction='']=clean.replace(/^-/,'').split('.');const whole=integer.replace(/^0+(?=\d)/,'');const tail=fraction.replace(/0+$/,'');return `${negative&&(whole!=='0'||tail)?'-':''}${whole}${tail?'.'+tail:''}`;}
+function validNumbers(value,quote){
+  const source=numericTokens(quote).map(numericKey);
+  return numericTokens(value).every(token=>{
+    const n=numericKey(token);if(source.includes(n))return true;
+    // Explicit USD billion -> 亿美元 conversion retained for the historical seed/imports.
+    if(!value.includes(`${token}亿美元`))return false;
+    return [...quote.matchAll(/\$\s*(\d+(?:\.\d+)?)\s*billion/gi)].some(m=>{const [whole,tail='']=m[1].split('.');return numericKey(whole+(tail[0]||'0')+(tail.length>1?'.'+tail.slice(1):''))===n;});
+  });
+}
 export function weight(material, statement) {
   if (statement.kind !== 'fact') return { level: '低', rank: 1, reason: '观点、推测或传闻不直接证明事件事实' };
   if (!material.url && !material.isSynthetic) return { level: '低', rank: 1, reason: '缺少可核对的原始来源链接' };
@@ -27,6 +61,7 @@ export function validateMaterial(m, event, existing = true) {
   invariant(typeof m.isSynthetic === 'boolean', '缺少真实/构造标记');
   for (const key of ['publishedAt', 'occurredAt', 'updatedAt', 'ingestedAt', 'capturedAt']) invariant(validTime(m[key]), `${key} 时间无效或缺少时区`);
   invariant(m.ingestedAt, '录入时间不可缺失');
+  validateProvenance(m);
   invariant(!m.updatedAt || !m.publishedAt || Date.parse(m.updatedAt) >= Date.parse(m.publishedAt), '材料更新时间早于披露时间，请核对');
   invariant(Array.isArray(m.statements) && m.statements.length > 0 && m.statements.length <= 20, '每份材料需有 1–20 条主张');
   const prior = flatten(event);
@@ -41,7 +76,8 @@ export function validateMaterial(m, event, existing = true) {
     invariant(typeof s.quote === 'string' && s.quote.length >= 2 && m.text.includes(s.quote), '引用必须逐字出现在材料原文中');
     invariant(['support', 'deny', 'correct', 'update'].includes(s.stance), '证据关系无效');
     invariant(typeof s.value === 'string' && s.value.trim() && s.value.length <= 500, '请填写用于核对的主张值');
-    if (/^-?\d+(?:\.\d+)?$/.test(s.value)) invariant((s.quote.match(/-?\d+(?:[,.]\d+)*/g) || []).some(n => Number(n.replaceAll(',', '')) === Number(s.value)), '数字主张值无法在引用原文定位');
+    invariant(validNumbers(s.value,s.quote),'数字主张值无法在引用原文定位');
+    for(const unit of s.value.match(/亿美元|亿元|万元|美元|人民币|USD|CNY|％|%/g)||[])invariant(s.quote.includes(unit)||(['亿美元','美元','USD'].includes(unit)&&s.quote.includes('$')),'主张值中的单位无法在引用原文定位');
     invariant(typeof s.scope === 'string' && s.scope.trim() && s.scope.length <= 500, '请注明适用范围');
     invariant(validTime(s.validUntil), '有效期时间格式无效');
     if (s.unit) invariant(typeof s.unit === 'string' && s.unit.length <= 40 && s.quote.includes(s.unit), '单位必须出现在引用原文中');
@@ -71,13 +107,14 @@ export function snapshot(event, asOf = new Date().toISOString()) {
     const active = evidence.filter(s => !superseded.has(s.id));
     const current = active.filter(s => !s.validUntil || Date.parse(s.validUntil.length === 10 ? `${s.validUntil}T23:59:59.999+08:00` : s.validUntil) >= Date.parse(asOf));
     const direct = current.filter(s => s.kind === 'fact' && s.weight.rank >= 2 && ['announcement', 'regulator'].includes(s.material.sourceType));
-    const scope = [...new Set(direct.map(s => s.scope))];
-    const conflict = scope.some(sc => new Set(direct.filter(s => s.scope === sc && s.stance !== 'deny').map(s => fingerprint(s.value) + '|' + fingerprint(s.unit || ''))).size > 1 || (direct.some(s => s.scope === sc && s.stance === 'deny') && direct.some(s => s.scope === sc && s.stance !== 'deny')));
+    const factual = current.filter(s=>s.kind==='fact'&&s.weight.rank>=2);
+    const scope = [...new Set(factual.map(s => s.scope))];
+    const conflict = scope.some(sc => new Set(factual.filter(s => s.scope === sc && s.stance !== 'deny').map(s => fingerprint(s.value) + '|' + fingerprint(s.unit || ''))).size > 1 || (factual.some(s => s.scope === sc && s.stance === 'deny') && factual.some(s => s.scope === sc && s.stance !== 'deny')));
     let status = !current.length && active.length ? 'expired' : conflict ? 'conflict' : direct.some(s => s.stance === 'deny') ? 'denied' : direct.length ? 'supported' : 'pending';
     const latest = [...current].sort((a, b) => Date.parse(b.material.updatedAt || b.material.publishedAt || 0) - Date.parse(a.material.updatedAt || a.material.publishedAt || 0));
     const selected = (direct.length ? [...direct].sort((a, b) => b.weight.rank - a.weight.rank || latest.indexOf(a) - latest.indexOf(b)) : latest)[0];
     const groups = [...new Set(current.map(s => s.material.independentGroup))];
-    const alternatives = [...new Set(direct.filter(s => s.stance !== 'deny').map(s => `${s.value}${s.unit || ''}（${s.scope}）`))];
+    const alternatives = [...new Set(factual.filter(s => s.stance !== 'deny').map(s => `${s.value}${s.unit || ''}（${s.scope}）`))];
     return { ...claim, status, labelStatus: STATUS[status], value: selected?.value || '暂无可用结论', unit: selected?.unit || '', scope: selected?.scope || '', alternatives, evidenceIds: evidence.map(s => s.id), activeIds: current.map(s => s.id), supersededIds: evidence.filter(s => superseded.has(s.id)).map(s => s.id), independentCount: groups.length, rejectedUpdates: rejected.filter(id => evidence.some(s => s.id === id)), reason: status === 'conflict' ? '同一适用范围存在相反事实陈述或不同数值，需人工核对。' : status === 'denied' ? '已收录直接否认陈述；否认本身不等于客观事实已查明。' : status === 'supported' ? '存在可定位的直接事实陈述；仍受来源核验和适用范围约束。' : status === 'expired' ? '证据的适用期已结束，不代表历史事实为假。' : '现有信息不足以核实，观点、推测和传闻不构成事实确认。' };
   });
 }
@@ -137,3 +174,13 @@ export function validateWorkspace(w) {
   return w;
 }
 export function freshness(event, now = Date.now()) { const times = event.materials.map(m => m.updatedAt || m.publishedAt).filter(Boolean).map(Date.parse); const last = times.length ? Math.max(...times) : null; return { last, stale: !last || now - last > 30 * 86400000, days: last ? Math.floor((now - last) / 86400000) : null }; }
+export function temporalFingerprint(events,asOf=new Date().toISOString()){return JSON.stringify(events.map(e=>[e.id,snapshot(e,asOf).map(c=>[c.id,c.status,c.activeIds,c.supersededIds]),freshness(e,Date.parse(asOf)).stale]));}
+export function relationEvidenceState(event,relation,asOf){
+  const material=event.materials.find(m=>m.id===relation.materialId);
+  if(!material)return {needsReview:true,reason:'依据未收录于当前回放'};
+  const claims=snapshot(event,asOf);
+  const superseded=new Set(claims.flatMap(c=>c.supersededIds));const active=new Set(claims.flatMap(c=>c.activeIds));
+  if(material.statements.some(s=>superseded.has(s.id)))return {needsReview:true,reason:'依据包含已被更新的主张，请复核关系'};
+  if(material.statements.some(s=>!active.has(s.id)))return {needsReview:true,reason:'依据包含已过期的主张，请复核关系'};
+  return {needsReview:false,reason:''};
+}

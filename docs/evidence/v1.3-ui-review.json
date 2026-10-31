@@ -1,0 +1,42 @@
+{
+  "verifiedAt": "2026-10-31T02:39:48.267Z",
+  "scope": "Chrome isolated localhost:4304; synthetic fixtures entered through visible forms",
+  "cases": [
+    {
+      "id": "optional_relation",
+      "passed": true,
+      "observed": "New event saved with relationship fields empty"
+    },
+    {
+      "id": "embedded_numeric",
+      "passed": true,
+      "observed": "999 embedded in text value rejected; review dialog and input preserved"
+    },
+    {
+      "id": "news_conflict",
+      "passed": true,
+      "observed": "Two news facts 8/10 CNY100m merged into one event and explicitly conflicting"
+    },
+    {
+      "id": "live_expiry",
+      "passed": true,
+      "observed": "35-second validity elapsed without user refresh; supported -> expired; relation and sidebar warn"
+    },
+    {
+      "id": "missing_feed_config",
+      "passed": true,
+      "observed": "Explicit unconfigured error; existing 6-event workspace unchanged"
+    },
+    {
+      "id": "legacy_import_domain",
+      "passed": true,
+      "observed": "Both valid historical JSON fixtures validate; invalid empty workspace remains rejected"
+    },
+    {
+      "id": "browser_auto_import",
+      "passed": false,
+      "limitation": "Extension blocks automated file selection; no access setting changed; not claimed as browser import success"
+    }
+  ],
+  "paidModelCallsThisRound": 0
+}

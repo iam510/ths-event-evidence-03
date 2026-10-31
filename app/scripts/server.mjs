@@ -12,7 +12,7 @@ http.createServer(async(req,res)=>{
    let body=''; for await(const chunk of req) {body+=chunk; if(body.length>30000){res.writeHead(413);res.end('Request too large');return;}}
    const request=new Request(url,{method:req.method,headers:req.headers,...(req.method==='POST'?{body}: {})});
    response=url.pathname==='/api/feed'?await feedRequest(request,process.env):await guardedAnalysis(request,process.env,{actor:req.socket.remoteAddress});
-  } else if(url.pathname==='/api/config') response=Response.json({...publicModelConfig(process.env),feeds:feedConfig(process.env),liveFeeds:Boolean(process.env.FUYAO_API_KEY),version:'1.2.0'},{headers:{'cache-control':'no-store'}});
+  } else if(url.pathname==='/api/config') response=Response.json({...publicModelConfig(process.env),feeds:feedConfig(process.env),liveFeeds:Boolean(process.env.FUYAO_API_KEY),version:'1.3.0'},{headers:{'cache-control':'no-store'}});
   else if(req.method==='GET' && routes[url.pathname]) { const [p,type]=routes[url.pathname];response=new Response(await readFile(new URL(`../${p}`,import.meta.url)),{headers:{'content-type':type,'cache-control':'no-cache'}}); }
   else response=new Response('Not found',{status:404});
   response.headers.set('x-content-type-options','nosniff');response.headers.set('referrer-policy','no-referrer');

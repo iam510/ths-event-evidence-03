@@ -1,9 +1,9 @@
-import {safeUrl,invariant} from './core.js';
+import {safeUrl,invariant,sourceText} from './core.js';
 import {createAnalysisLimiter} from './api.js';
 const ORIGIN='https://fuyao.aicubes.cn';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'cache-control':'no-store'}});
 export const feedConfig=env=>({provider:'扶摇',configured:Boolean(env.FUYAO_API_KEY),mode:'on-demand',kinds:['stock','flash']});
-export function plainText(value){return String(value??'').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi,'').replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|amp|lt|gt|quot|#39);/g,s=>({'&nbsp;':' ','&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'"}[s])).replace(/\s+/g,' ').trim();}
+export const plainText=sourceText;
 function time(value){if(value===null||value===undefined)return null;invariant(Number.isSafeInteger(value)&&value>0&&value<8640000000000000,'资讯时间字段无效');return new Date(value).toISOString();}
 export function normalizeFeed(data,kind,code,capturedAt,requestId){
  invariant(data&&Array.isArray(data.items)&&data.items.length<=100,'资讯列表结构无效');
