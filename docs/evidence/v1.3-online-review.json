@@ -1,0 +1,49 @@
+{
+  "verifiedAt": "2026-10-31T02:44:04.298303+00:00",
+  "access": "public; no authentication headers/cookies in curl requests",
+  "deploymentVersion": 6,
+  "configuration": {
+    "version": "1.3.0",
+    "aiConfigured": true,
+    "provider": "MiniMax",
+    "model": "MiniMax-M3.1-Flash",
+    "feeds": {
+      "provider": "扶摇",
+      "configured": true,
+      "mode": "on-demand",
+      "kinds": [
+        "stock",
+        "flash"
+      ]
+    }
+  },
+  "assets": [
+    {
+      "asset": "app.js",
+      "matchesCurrentSource": true,
+      "sha256": "07f8f37b7d124f3bdfa5482ce7dcf6478f8a03c359c5174e33e986f73349d5b2"
+    },
+    {
+      "asset": "core.js",
+      "matchesCurrentSource": true,
+      "sha256": "080210e6010b178de348416d698a64b5040286e079c8ef1e334599dec2959e96"
+    }
+  ],
+  "feed": {
+    "status": 200,
+    "count": 20,
+    "capturedAt": "2026-10-31T02:42:12.173Z",
+    "requestId": "7bdfe8049b5d4f15a7cc7b989dec27c4"
+  },
+  "browser": {
+    "version": "1.3",
+    "priorWorkspaceRestored": true,
+    "eventCount": 4,
+    "priorSyntheticLiveTestMaterialPresent": true,
+    "newEventReviewAvailable": true,
+    "consoleErrorsOrWarnings": [],
+    "productionWorkspaceMutatedThisRound": false
+  },
+  "modelHealthNote": "Configured only in this round; previous real model success retained separately. No new paid model call.",
+  "networkNote": "One curl core.js request had TLS reset; a normal retry was used. No security protection changed."
+}
